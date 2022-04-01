@@ -48,6 +48,16 @@ export default{
                 }
             })
             return exists.length !== 0
+        },
+        photos: ({id}, {page}) => {
+            return client.user.findUnique({
+                where:{
+                    id: id
+                }
+            }).photos({
+                take: 5,
+                skip: 5*(page-1)
+            })
         }
     }
 }
