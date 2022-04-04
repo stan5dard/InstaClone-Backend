@@ -6,6 +6,6 @@ export default gql`
     }
 
     type Mutation{
-        likePhoto(id: Int!): LikePhotoResult!
+        toggleLike(id: Int!): LikePhotoResult!
     }
 `

@@ -21,6 +21,7 @@ const resolvers : Resolvers = {
                     },
                     data:{
                         following:{
+                            //following은 user와 relation이 있는 필드. connect로 만들어주자
                             connect:{
                                 username: username,
                             }
