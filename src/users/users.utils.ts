@@ -26,11 +26,22 @@ export const getUser = async (token) => {
 
 export const protectedResolver = (ourResolver : Resolver) => (root, args, context, info) => {
     //로그인과 관련된 리턴을 편하게 주려고 만든 함수
+    //root는 computedfield 같은 곳에서 parent의 다른 변수를 접근할 때
+    //context는 전체에 공유되는 정보
+    //info는 query인지 mutation인지 알 수 있음
+
     if(!context.loggedInUser){
-        return{
-            ok: false,
-            error: "Please login to perform this action"
+        const query = info.operation.operation === "query"
+        if(query){
+            return null
         }
+        else{
+            return{
+                ok: false,
+                error: "Please login to perform this action"
+            }
+        }
+        
     }
     return ourResolver(root, args,context, info)
 }
